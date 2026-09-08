@@ -1,0 +1,141 @@
+Company Knowledge Base
+Product: NovaDesk
+
+NovaDesk is a customer support platform designed for small and medium-sized businesses. It allows support teams to manage customer conversations, create support tickets, and track issue resolution.
+
+NovaDesk has three subscription plans: Starter, Professional, and Enterprise.
+
+The Starter plan costs $19 per user per month and supports up to 5 team members. It includes email-based customer support, basic ticket management, and standard reporting.
+
+The Professional plan costs $49 per user per month. It includes everything in Starter, plus live chat, automated workflows, advanced analytics, and custom ticket fields.
+
+The Enterprise plan uses custom pricing. It includes everything in Professional, along with dedicated account management, single sign-on (SSO), audit logs, priority support, and custom data retention policies.
+
+Customer Support
+
+NovaDesk customer support is available Monday through Friday from 9:00 AM to 6:00 PM UTC.
+
+Professional customers receive priority support. Enterprise customers receive 24/7 priority support.
+
+The average response time for Starter customers is within 24 hours. Professional customers typically receive a response within 8 business hours. Enterprise customers are guaranteed an initial response within 2 hours for critical issues.
+
+Security
+
+NovaDesk encrypts customer data both in transit and at rest. Data transmitted between users and NovaDesk servers is protected using TLS encryption.
+
+Enterprise customers can enable single sign-on using SAML 2.0. NovaDesk also provides audit logs for Enterprise accounts, allowing administrators to monitor important account activities.
+
+NovaDesk performs regular security assessments and maintains automated backups of customer data.
+
+Data Retention
+
+Starter and Professional accounts retain deleted tickets for 30 days before permanent deletion.
+
+Enterprise customers can configure custom data retention periods according to their organization's requirements.
+
+When an account is permanently closed, customer data is scheduled for deletion according to the applicable retention policy.
+
+Integrations
+
+NovaDesk integrates with Slack, Microsoft Teams, Google Workspace, and several CRM systems.
+
+The Slack integration can send notifications when a ticket is created, assigned, updated, or resolved.
+
+The Microsoft Teams integration allows support agents to receive ticket notifications directly inside Teams.
+
+Google Workspace integration supports user authentication and calendar-related workflows.
+
+API
+
+NovaDesk provides a REST API for Professional and Enterprise customers.
+
+The API uses HTTPS and requires authentication using API keys or OAuth 2.0, depending on the integration.
+
+API requests are subject to rate limits. Professional accounts can make up to 1,000 API requests per minute, while Enterprise accounts can negotiate higher limits.
+
+Developers can use the API to create tickets, update tickets, retrieve customer information, and access reporting data.
+
+Billing
+
+NovaDesk subscriptions are billed monthly unless an Enterprise customer has negotiated an annual contract.
+
+Changing from Starter to Professional takes effect immediately. The customer is charged a prorated amount for the remainder of the billing period.
+
+Downgrading from Professional to Starter takes effect at the beginning of the next billing cycle.
+
+Customers can update their billing information from the Billing section of the NovaDesk administration dashboard.
+
+Account Administration
+
+Only users with administrator permissions can change subscription plans, manage billing information, configure SSO, or modify organization-wide security settings.
+
+Support agents can create and update tickets but cannot modify billing settings.
+
+Administrators can assign roles to users and revoke access when an employee leaves the organization.
+
+Incident Management
+
+When NovaDesk detects a major service outage, the operations team creates an incident and begins investigating the cause.
+
+Critical incidents are communicated to Enterprise customers through priority support channels.
+
+After a major incident is resolved, NovaDesk performs a post-incident review. The review may include the root cause, timeline of events, customer impact, and corrective actions.
+
+Office Locations
+
+NovaDesk has its primary engineering office in Bengaluru, India.
+
+The company also has a sales office in London, United Kingdom, and a customer operations office in Austin, Texas.
+
+The Bengaluru engineering team is responsible for most backend infrastructure and API development.
+
+Example Policies
+
+A customer cannot transfer an active NovaDesk subscription to another organization without approval from NovaDesk's billing team.
+
+API keys should be treated as confidential credentials and must not be included in publicly accessible source code.
+
+If an employee leaves a customer organization, an administrator should immediately disable that user's NovaDesk account.
+
+Enterprise customers requesting custom data retention or security requirements should contact their account manager.
+
+Frequently Asked Questions
+How much does NovaDesk Professional cost?
+
+NovaDesk Professional costs $49 per user per month.
+
+Does NovaDesk support SSO?
+
+Yes. SAML 2.0 single sign-on is available for Enterprise customers.
+
+Does NovaDesk have an API?
+
+Yes. A REST API is available to Professional and Enterprise customers.
+
+How long are deleted tickets retained?
+
+Starter and Professional accounts retain deleted tickets for 30 days. Enterprise customers can configure their own retention period.
+
+Where is NovaDesk's engineering office?
+
+NovaDesk's primary engineering office is located in Bengaluru, India.
+
+Who can change billing information?
+
+Users with administrator permissions can modify billing information.
+
+Does NovaDesk provide 24/7 support?
+
+24/7 priority support is available to Enterprise customers. Starter and Professional customers receive support during business hours.
+
+What happens when a customer downgrades their plan?
+
+A downgrade takes effect at the beginning of the customer's next billing cycle.
+
+What authentication methods does the API support?
+
+Depending on the integration, the API supports API keys and OAuth 2.0.
+
+Can API rate limits be increased?
+
+Enterprise customers can negotiate higher API rate limits with NovaDesk.

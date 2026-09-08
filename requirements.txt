@@ -1,0 +1,11 @@
+langchain
+langsmith
+numpy
+pandas
+transformers
+faiss
+streamlit
+pyMuPDF
+pyPDF
+langchain-text-splitters 
+sentence-transformers

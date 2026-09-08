@@ -1,6 +1,7 @@
 from sentence_transformers import SentenceTransformer
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from src.components.DataIngestion import DataIngestion
+import warnings
 
 
 class EmbeddingManager:
@@ -28,24 +29,46 @@ class EmbeddingManager:
             show_progress_bar=True,
             normalize_embeddings=True,
         )
+        
 
         return embeddings
 
 if __name__ == "__main__":
+    warnings.filterwarnings("ignore")
     path = "/Users/abhiram/Documents/RAG with citation/files"
     data_ingestion = DataIngestion(path)
     text_docs, pdf_docs = data_ingestion.load_documents()
-    print(type(text_docs), len(text_docs))
-    print(type(pdf_docs), len(pdf_docs))  
+    print("Number of text documents:", len(text_docs))
+    print("Number of PDF documents:", len(pdf_docs))
+
+    for i, doc in enumerate(text_docs):
+        print(f"\n--- Text document {i} ---")
+        print("Content length:", len(doc.page_content))
+        print("Preview:", repr(doc.page_content[:200]))
+        print("Metadata:", doc.metadata)
+
+    for i, doc in enumerate(pdf_docs):
+        print(f"\n--- PDF document {i} ---")
+        print("Content length:", len(doc.page_content))
+        print("Preview:", repr(doc.page_content[:200]))
+        print("Metadata:", doc.metadata)
+
+     
     print("Total docs loaded:", len(text_docs) + len(pdf_docs))
 
     embedding_manager = EmbeddingManager()
+    print("Chunking documents...")
     text_chunks = embedding_manager.chunk_docs(text_docs)
     pdf_chunks = embedding_manager.chunk_docs(pdf_docs)
+
+    print("Chunked documents:")
     print("Total text chunks:", len(text_chunks))
     print("Total pdf chunks:", len(pdf_chunks)) 
 
+    print("Generating embeddings...")
     embeddings_text = embedding_manager.generate_embeddings(text_chunks)
     embeddings_pdf = embedding_manager.generate_embeddings(pdf_chunks)
+
+    print("Embeddings generated:")
     print("Embeddings for text chunks:", embeddings_text.shape)
     print("Embeddings for pdf chunks:", embeddings_pdf.shape)
