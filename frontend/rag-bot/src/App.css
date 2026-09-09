@@ -249,4 +249,126 @@ input {
   .input-area {
     padding: 10px 15px 15px;
   }
+} 
+/* =========================
+   Input Area
+========================= */
+
+.input-area {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 15px 20px 25px;
+}
+
+/* Selected File */
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 12px;
+  margin-bottom: 8px;
+
+  background: #f3f3f3;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-size: 13px;
+}
+
+.selected-file button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Input Row */
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* File Button */
+
+.file-button {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #ccc;
+  border-radius: 9px;
+
+  background: white;
+  cursor: pointer;
+
+  font-size: 18px;
+}
+
+.file-button:hover {
+  background: #f2f2f2;
+}
+
+.file-button input {
+  display: none;
+}
+
+/* Text Input */
+
+.input-row input[type="text"] {
+  flex: 1;
+
+  padding: 13px 15px;
+
+  border: 1px solid #ccc;
+  border-radius: 9px;
+
+  outline: none;
+  font-size: 15px;
+}
+
+.input-row input[type="text"]:focus {
+  border-color: #888;
+}
+
+/* Send Button */
+
+.send-button {
+  height: 45px;
+
+  padding: 0 20px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #222;
+  color: white;
+
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background: #444;
+}
+
+/* File shown in chat */
+
+.message-file {
+  display: inline-block;
+
+  margin-bottom: 8px;
+  padding: 8px 12px;
+
+  background: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+
+  font-size: 13px;
 }

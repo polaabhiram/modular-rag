@@ -4,13 +4,15 @@ import "./App.css";
 function App() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const sendMessage = () => {
-    if (!input.trim()) return;
+    if (!input.trim() && !selectedFile) return;
 
     const userMessage = {
       role: "user",
       content: input,
+      file: selectedFile,
     };
 
     const assistantMessage = {
@@ -20,12 +22,27 @@ function App() {
     };
 
     setMessages([...messages, userMessage, assistantMessage]);
+
     setInput("");
+    setSelectedFile(null);
   };
 
   const newChat = () => {
     setMessages([]);
     setInput("");
+    setSelectedFile(null);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const removeFile = () => {
+    setSelectedFile(null);
   };
 
   return (
@@ -33,6 +50,7 @@ function App() {
 
       {/* Sidebar */}
       <aside className="sidebar">
+
         <h2>RAG Chat</h2>
 
         <button onClick={newChat} className="new-chat">
@@ -54,6 +72,7 @@ function App() {
             Customer support
           </button>
         </div>
+
       </aside>
 
       {/* Main Chat */}
@@ -70,7 +89,9 @@ function App() {
           {messages.length === 0 && (
             <div className="welcome">
               <h2>How can I help?</h2>
-              <p>Ask a question about your documents.</p>
+              <p>
+                Ask a question or upload a document.
+              </p>
             </div>
           )}
 
@@ -80,35 +101,78 @@ function App() {
               className={`message ${message.role}`}
             >
               <div className="message-label">
-                {message.role === "user" ? "You" : "Assistant"}
+                {message.role === "user"
+                  ? "You"
+                  : "Assistant"}
               </div>
 
-              <div className="message-content">
-                {message.content}
-              </div>
+              {message.file && (
+                <div className="message-file">
+                  📄 {message.file.name}
+                </div>
+              )}
+
+              {message.content && (
+                <div className="message-content">
+                  {message.content}
+                </div>
+              )}
             </div>
           ))}
 
         </div>
 
-        {/* Input */}
+        {/* Input Area */}
         <div className="input-area">
 
-          <input
-            type="text"
-            placeholder="Ask a question..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage();
-              }
-            }}
-          />
+          {/* Selected File */}
+          {selectedFile && (
+            <div className="selected-file">
+              <span>
+                📄 {selectedFile.name}
+              </span>
 
-          <button onClick={sendMessage}>
-            Send
-          </button>
+              <button onClick={removeFile}>
+                ✕
+              </button>
+            </div>
+          )}
+
+          <div className="input-row">
+
+            {/* File Upload */}
+            <label className="file-button">
+              📎
+
+              <input
+                type="file"
+                accept=".pdf,.txt"
+                onChange={handleFileChange}
+              />
+            </label>
+
+            {/* Text Input */}
+            <input
+              type="text"
+              placeholder="Ask a question..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
+            />
+
+            {/* Send */}
+            <button
+              className="send-button"
+              onClick={sendMessage}
+            >
+              Send
+            </button>
+
+          </div>
 
         </div>
 
