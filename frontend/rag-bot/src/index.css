@@ -1,0 +1,18 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.searchbox{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.sidebar{
+  width:30%;
+  height:100%;
+  position:fixed;
+  left:0;
+  border-right:1px solid #ccc;
+}

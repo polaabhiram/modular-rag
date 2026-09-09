@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #222;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+/* =========================
+   Main Layout
+========================= */
+
+.app {
+  display: flex;
+  height: 100vh;
+  background: #ffffff;
+}
+
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  padding: 20px 15px;
+  background: #f7f7f8;
+  border-right: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin: 0 0 20px 10px;
+  font-size: 20px;
+}
+
+.new-chat {
+  width: 100%;
+  padding: 11px 15px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.new-chat:hover {
+  background: #eeeeee;
+}
+
+.chat-list {
+  margin-top: 25px;
+}
+
+.chat-list p {
+  margin: 0 10px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.chat-item {
+  width: 100%;
+  padding: 11px 12px;
+  margin-bottom: 4px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.chat-item:hover {
+  background: #e9e9e9;
+}
+
+/* =========================
+   Chat Container
+========================= */
+
+.chat-container {
+  flex: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================
+   Header
+========================= */
+
+.chat-header {
+  padding: 20px 30px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.chat-header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.chat-header p {
+  margin: 5px 0 0;
+  font-size: 13px;
+  color: #888;
+}
+
+/* =========================
+   Messages
+========================= */
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+.welcome {
+  text-align: center;
+  margin-top: 150px;
+}
+
+.welcome h2 {
+  margin-bottom: 8px;
+  font-size: 26px;
+}
+
+.welcome p {
+  color: #888;
+}
+
+/* Individual message */
+
+.message {
+  max-width: 800px;
+  margin: 0 auto 25px;
+}
+
+.message-label {
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #666;
+}
+
+.message-content {
+  padding: 13px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* User */
+
+.message.user .message-content {
+  background: #eeeeee;
+}
+
+/* Assistant */
+
+.message.assistant .message-content {
+  background: #f7f7f8;
+  border: 1px solid #eeeeee;
+}
+
+/* =========================
+   Input Area
+========================= */
+
+.input-area {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 15px 20px 25px;
+  display: flex;
+  gap: 10px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.input-area input:focus {
+  border-color: #888;
+}
+
+.input-area button {
+  padding: 0 22px;
+  border: none;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background: #444;
+}
+
+/* =========================
+   Scrollbar
+========================= */
+
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 10px;
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 700px) {
+  .sidebar {
+    width: 210px;
+  }
+
+  .messages {
+    padding: 20px 15px;
+  }
+
+  .chat-header {
+    padding: 18px;
+  }
+
+  .input-area {
+    padding: 10px 15px 15px;
+  }
+}
