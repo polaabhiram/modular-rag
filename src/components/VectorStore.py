@@ -37,19 +37,49 @@ class FaissVectorStore:
     # ---------- indexing ----------
     def add_documents(self, documents: List[Any]):
         """Chunk, embed and append documents to the index, then persist."""
+
         if not documents:
             return 0
+
         chunks = self.emb.chunk_docs(documents)
-        embeddings = np.array(self.emb.generate_embeddings(chunks)).astype("float32")
-        metadatas = [{"text": c.page_content, **c.metadata} for c in chunks]
+
+        # PDF may contain only images / scanned pages
+        if not chunks:
+            print("[WARNING] No text chunks extracted from document.")
+            return 0
+
+        embeddings = np.asarray(
+            self.emb.generate_embeddings(chunks),
+            dtype="float32"
+        )
+
+        # Extra safety check
+        if embeddings.ndim != 2 or embeddings.shape[0] == 0:
+            print("[WARNING] No embeddings generated.")
+            return 0
+
+        metadatas = [
+            {
+                "text": c.page_content,
+                **c.metadata
+            }
+            for c in chunks
+        ]
+
         if self.index is None:
             self.index = faiss.IndexFlatL2(embeddings.shape[1])
+
         self.index.add(embeddings)
         self.metadata.extend(metadatas)
-        self.save()
-        print(f"[INFO] Added {len(chunks)} chunks (total {self.index.ntotal})")
-        return len(chunks)
 
+        self.save()
+
+        print(
+            f"[INFO] Added {len(chunks)} chunks "
+            f"(total {self.index.ntotal})"
+        )
+
+        return len(chunks)
     def build_from_documents(self, documents: List[Any]):
         """Full rebuild: drops the old index first so re-ingesting never duplicates chunks."""
         self.reset()

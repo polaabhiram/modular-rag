@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Sidebar from "./Sidebar.jsx";
 import Answer from "./Answer.jsx";
-import { ask, getStatus, rebuildIndex, uploadFiles } from "./api.js";
+import { ask, getStatus, rebuildIndex, uploadFiles, deleteAllFiles } from "./api.js";
 
 export default function App() {
   const [status, setStatus] = useState({ ready: false, documents: [] });
@@ -15,15 +15,15 @@ export default function App() {
 
   useEffect(() => {
     getStatus()
-  .then((data) => {
-    setStatus({
-      ready: data.ready ?? false,
-      documents: data.documents ?? [],
-    });
-  })
-  .catch((e) => {
-    say("Cannot reach the server: " + e.message, true);
-  });
+      .then((data) => {
+        setStatus({
+          ready: data.ready ?? false,
+          documents: data.documents ?? [],
+        });
+      })
+      .catch((e) => {
+        say("Cannot reach the server: " + e.message, true);
+      });
   }, []);
 
   useEffect(() => {
@@ -39,6 +39,26 @@ export default function App() {
       say(r.errors.length ? r.errors.join(" • ") : "Added " + r.saved.join(", "), r.errors.length > 0);
     } catch (e) {
       say(e.message, true);
+    }
+  }
+  async function handleDeleteAll() {
+    const confirmed = window.confirm(
+      "Delete all uploaded files and clear the RAG index?"
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await deleteAllFiles();
+
+      setStatus({
+        ready: false,
+        documents: [],
+      });
+
+      say("All files and the index were deleted.");
+    } catch (e) {
+      say("Failed to delete files: " + e.message, true);
     }
   }
 
@@ -82,7 +102,7 @@ export default function App() {
 
   return (
     <>
-      <Sidebar documents={status.documents} note={note} onUpload={onUpload} onRebuild={onRebuild} />
+      <Sidebar documents={status.documents} note={note} onUpload={onUpload} onRebuild={onRebuild} onDeleteAll={handleDeleteAll} />
       <main>
         <div className="log" ref={logRef} aria-live="polite">
           {messages.length === 0 ? (

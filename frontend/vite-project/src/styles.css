@@ -46,3 +46,6 @@ textarea{flex:1;resize:none;font:inherit;color:inherit;background:var(--bg);bord
 .send:disabled{opacity:.5;cursor:default}
 @media(max-width:760px){#root{grid-template-columns:1fr;grid-template-rows:auto 1fr}aside{border-right:0;border-bottom:1px solid var(--line);max-height:34vh}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.delete-btn {
+  margin-top: 8px;
+}

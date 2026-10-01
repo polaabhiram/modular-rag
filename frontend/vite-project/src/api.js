@@ -18,3 +18,8 @@ export const ask = (question) =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ question }),
   });
+
+export const deleteAllFiles = () =>
+  request("/api/files", {
+    method: "DELETE",
+  });

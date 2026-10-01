@@ -57,8 +57,10 @@ async def upload(files: list[UploadFile] = File(...)):
         try:
             rag.add_file(str(dest))
             saved.append(name)
-        except Exception as e:  # unreadable PDF, bad encoding, ...
-            dest.unlink(missing_ok=True)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+
             errors.append(f"{name}: could not be read ({e})")
     return {"saved": saved, "errors": errors, **_status()}
 
@@ -78,6 +80,31 @@ def query(body: Question):
         return rag.generate_answer(body.question.strip(), top_k=body.top_k)
     except Exception as e:
         raise HTTPException(502, f"The language model request failed: {e}")
+
+@app.delete("/api/files")
+def delete_all_files():
+    deleted = []
+
+    # Delete uploaded files
+    for folder in FOLDERS.values():
+        folder.mkdir(parents=True, exist_ok=True)
+
+        for file in folder.iterdir():
+            if file.is_file():
+                file.unlink()
+                deleted.append(file.name)
+
+    # Clear FAISS index + metadata
+    rag.vector_store.reset()
+    rag.vector_store.save()
+
+    return {
+        "message": "All files deleted successfully",
+        "deleted": deleted,
+        "count": len(deleted),
+        "ready": rag.ready,
+        "documents": rag.vector_store.documents(),
+    }
 
 
 # Serve the built React app (run `npm run build` in frontend/). API routes above take priority.

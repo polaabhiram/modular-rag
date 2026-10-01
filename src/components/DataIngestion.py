@@ -1,5 +1,5 @@
 import os
-from langchain_community.document_loaders import TextLoader, PyPDFLoader
+from langchain_community.document_loaders import TextLoader, PyPDFLoader,PyMuPDFLoader
 
 SUPPORTED = {".pdf": "pdf", ".txt": "text"}
 
@@ -15,7 +15,7 @@ class DataIngestion:
         if ext not in SUPPORTED:
             raise ValueError(f"Unsupported file type: {ext}")
         if ext == ".pdf":
-            docs = PyPDFLoader(file_path).load()
+            docs = PyMuPDFLoader(file_path).load()
         else:
             docs = TextLoader(file_path, encoding="utf-8").load()
         for doc in docs:

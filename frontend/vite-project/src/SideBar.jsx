@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-export default function Sidebar({ documents, note, onUpload, onRebuild }) {
+export default function Sidebar({ documents, note, onUpload, onRebuild ,onDeleteAll}) {
   const input = useRef(null);
   const [over, setOver] = useState(false);
 
@@ -35,8 +35,8 @@ export default function Sidebar({ documents, note, onUpload, onRebuild }) {
       <div className={"note" + (note.error ? " err" : "")} role="status">{note.text}</div>
 
       <ul className="docs">
-        {documents.length ? (
-          documents.map((d) => (
+        {(documents ?? []).length > 0 ? (
+          (documents ?? []).map((d) => (
             <li key={d.name}>
               <span title={d.name}>{d.name}</span>
               <span>{d.chunks} chunks</span>
@@ -48,6 +48,13 @@ export default function Sidebar({ documents, note, onUpload, onRebuild }) {
       </ul>
 
       <button className="btn" type="button" onClick={onRebuild}>Rebuild index</button>
+      <button
+        className="btn delete-btn"
+        type="button"
+        onClick={onDeleteAll}
+      >
+        Delete all files
+      </button>
     </aside>
   );
 }
