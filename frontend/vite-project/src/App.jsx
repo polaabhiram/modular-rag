@@ -14,7 +14,16 @@ export default function App() {
   const say = (text, error = false) => setNote({ text, error });
 
   useEffect(() => {
-    getStatus().then(setStatus).catch((e) => say("Cannot reach the server: " + e.message, true));
+    getStatus()
+  .then((data) => {
+    setStatus({
+      ready: data.ready ?? false,
+      documents: data.documents ?? [],
+    });
+  })
+  .catch((e) => {
+    say("Cannot reach the server: " + e.message, true);
+  });
   }, []);
 
   useEffect(() => {
