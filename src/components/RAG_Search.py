@@ -29,8 +29,7 @@ class RAGSearch:
         self.vector_store = FaissVectorStore(persist_dir, embedding_model, chunk_size, chunk_overlap)
         self.vector_store.load()  # reuse the saved index instead of re-embedding on every start
         self.model = ChatGroq(model_name=llm_model, temperature=temperature, max_tokens=max_tokens)
-        self.ready = False
-
+        
     @property
     def ready(self) -> bool:
         return self.vector_store.ready
